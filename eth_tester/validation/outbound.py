@@ -81,6 +81,8 @@ validate_log_entry = partial(validate_dict, key_validators=LOG_ENTRY_VALIDATORS)
 
 def validate_signature_v(value):
     validate_positive_integer(value)
+    if value >= 35:
+        value = (value - 35) // 2
     if value not in {0, 1, 27, 28}:
         # TODO: what is the correct validation for this?
         raise ValidationError("The `v` portion of the signature must be 0, 1, 27, or 28")
